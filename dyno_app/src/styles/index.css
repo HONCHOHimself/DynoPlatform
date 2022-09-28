@@ -1,0 +1,38 @@
+
+/*
+	Colors:
+		#17252A
+		#2B7A78
+		#3AAFA9
+		#DEF2F1
+		#FEFFFF
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+main {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 100%;
+}
+
+main header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 30px 30px 0px 30px;
+	border: 0;
+}
+
+main header img {
+	width: 40px;
+}

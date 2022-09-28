@@ -1,0 +1,194 @@
+
+@media only screen and (min-height: 300px) and (max-height: 700px) {
+	main form.light-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 30px;
+	}
+}
+
+@media only screen and (min-height: 700px) and (max-height: 850px) {
+	main form.light-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 90px;
+	}
+}
+
+@media only screen and (min-height: 850px) and (max-height: 1000px) {
+	main form.light-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 140px;
+	}
+}
+
+@media only screen and (min-height: 1000px) {
+	main form.light-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 150px;
+	}
+}
+
+main form.light-register-form img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+main form.light-register-form h1 {
+	color: #17252A;
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
+main form.light-register-form input {
+	width: 100%;
+	background-color: #DEF2F1;
+	border: 0;
+	border-radius: 20px;
+	padding: 15px 15px 15px 40px;
+	margin-top: 10px;
+	font-size: 1em;
+	color: #17252A;
+	font-weight: 600;
+}
+
+main form.light-register-form input:focus {
+	outline: none;
+}
+
+main form.light-register-form input[type="submit"] {
+	width: 100%;
+	background-color: #3AAFA9;
+	border: 0;
+	border-radius: 20px;
+	padding: 15px;
+	margin-top: 20px;
+	font-size: 1em;
+	color: #FEFFFF;
+	font-weight: 600;
+}
+
+main form.light-register-form p {
+	margin-top: 20px;
+	font-size: 1em;
+	font-weight: 500;
+	color: #17252A;
+}
+
+main form.light-register-form p .login-button {
+	font-weight: 600;
+	color: #17252A;
+	text-decoration: underline;
+}
+
+
+@media only screen and (min-height: 300px) and (max-height: 700px) {
+	main form.dark-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 30px;
+	}
+}
+
+@media only screen and (min-height: 700px) and (max-height: 850px) {
+	main form.dark-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 90px;
+	}
+}
+
+@media only screen and (min-height: 850px) and (max-height: 1000px) {
+	main form.dark-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 140px;
+	}
+}
+
+@media only screen and (min-height: 1000px) {
+	main form.dark-register-form {
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 20px;
+		text-align: center;
+		margin-top: 150px;
+	}
+}
+
+main form.dark-register-form img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+main form.dark-register-form h1 {
+	color: #FEFFFF;
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
+main form.dark-register-form input {
+	width: 100%;
+	background-color: #DEF2F1;
+	border: 0;
+	border-radius: 20px;
+	padding: 15px 15px 15px 40px;
+	margin-top: 10px;
+	font-size: 1em;
+	color: #17252A;
+	font-weight: 600;
+}
+
+main form.dark-register-form input:focus {
+	outline: none;
+}
+
+main form.dark-register-form input[type="submit"] {
+	width: 100%;
+	background-color: #3AAFA9;
+	border: 0;
+	border-radius: 20px;
+	padding: 15px;
+	margin-top: 20px;
+	font-size: 1em;
+	color: #FEFFFF;
+	font-weight: 600;
+}
+
+main form.dark-register-form p {
+	margin-top: 20px;
+	font-size: 1em;
+	font-weight: 500;
+	color: #FEFFFF;
+}
+
+main form.dark-register-form p .login-button {
+	font-weight: 600;
+	color: #DEF2F1;
+	text-decoration: underline;
+}
+
