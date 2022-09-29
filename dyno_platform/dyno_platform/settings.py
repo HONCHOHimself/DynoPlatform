@@ -27,7 +27,7 @@ SECRET_KEY = 'JdLgQ2m0rZfvX5k_N0xxiFQp_9Do-iL8m2jNzoMM94lb9m8RemDr_FTiWjE7G3AJA1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dynoplatform-api.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
