@@ -14,8 +14,6 @@ class App extends React.Component {
 			token: localStorage.getItem('token'),
 			color_mode: localStorage.getItem('color_mode'),
 			auth_page: true,
-			loading_login_page: true,
-			loading_register_page: true,
 		}
 		this.goToLoginPage = this.goToLoginPage.bind(this)
 		this.goToRegisterPage = this.goToRegisterPage.bind(this)
@@ -26,11 +24,9 @@ class App extends React.Component {
 	}
 	goToLoginPage() {
 		this.setState({ auth_page: true })
-		this.setState({ loading_login_page: true })
 	}
 	goToRegisterPage() {
 		this.setState({ auth_page: false })
-		this.setState({ loading_register_page: true })
 	}
 	turnToDarkMode() {
 		localStorage.setItem('color_mode', 'dark')
@@ -46,12 +42,6 @@ class App extends React.Component {
 		} else {
 			localStorage.setItem('color_mode', 'light')
 		}
-		setInterval(() => {
-			this.setState({ loading_login_page: false })
-		}, 1000)
-		setInterval(() => {
-			this.setState({ loading_register_page: false })
-		}, 1000)
 	}
 	loginUser(token) {
 		localStorage.setItem('token', token)
@@ -78,48 +68,8 @@ class App extends React.Component {
 					this.state.token ?
 					<Profile /> :
 					this.state.auth_page ?
-					<div>
-						{
-							this.state.loading_login_page ?
-							<div style={{
-								position: 'fixed',
-								bottom: '0',
-								width: '100%',
-								height: '50%',
-							}}>
-								<i className="fa-solid fa-spinner" style={{
-									fontSize: '40px',
-									color: '#3AAFA9',
-									display: 'block',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-									width: '100%',
-								}}></i>
-							</div> :
-							<Login goToRegisterPage={this.goToRegisterPage} loginUser={t => {this.loginUser(t)}} />
-						}
-					</div> :
-					<div>
-						{
-							this.state.loading_register_page ?
-							<div style={{
-								position: 'fixed',
-								bottom: '0',
-								width: '100%',
-								height: '50%',
-							}}>
-								<i className="fa-solid fa-spinner" style={{
-									fontSize: '40px',
-									color: '#3AAFA9',
-									display: 'block',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-									width: '100%',
-								}}></i>
-							</div> :
-							<Register goToLoginPage={this.goToLoginPage} loginUser={t => {this.loginUser(t)}} />
-						}
-					</div>
+					<Login goToRegisterPage={this.goToRegisterPage} loginUser={t => {this.loginUser(t)}} /> :
+					<Register goToLoginPage={this.goToLoginPage} loginUser={t => {this.loginUser(t)}} />
 				}
 			</main>
 		)

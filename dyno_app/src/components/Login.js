@@ -32,13 +32,18 @@ class Login extends React.Component {
 		form_data.append('username', this.state.username)
 		form_data.append('password', this.state.password)
 		axios.post('http://localhost:8000/auth/login/', form_data).then(res => {
-			if (res.data === 'Invalid Credentials.') {
-				this.setState({ error: res.data })
+			if (res.data[0] !== true) {
+				this.setState({ error: res.data[1] })
 			} else {
 				this.setState({ error: '', username: '', password: '' })
-				this.props.loginUser(res.data)
+				this.props.loginUser(res.data[1])
 			}
 		})
+	}
+	componentDidMount() {
+		setInterval(() => {
+			this.setState({ error: '' })
+		}, 5000)
 	}
 	render() {
 		return (

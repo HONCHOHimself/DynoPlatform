@@ -60,13 +60,18 @@ class Register extends React.Component {
 		form_data.append('email', this.state.email)
 		form_data.append('password', this.state.password)
 		axios.post('http://localhost:8000/auth/register/', form_data).then(res => {
-			if (res.data !== true) {
-				this.setState({ error: res.data })
+			if (res.data[0] !== true) {
+				this.setState({ error: res.data[1] })
 			} else {
 				this.setState({ error: '', username: '', email: '', password: '' })
-				this.props.loginUser(res.data)
+				this.props.loginUser(res.data[1])
 			}
 		})
+	}
+	componentDidMount() {
+		setInterval(() => {
+			this.setState({ error: '' })
+		}, 5000)
 	}
 	render() {
 		return (

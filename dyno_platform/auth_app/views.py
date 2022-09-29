@@ -18,28 +18,35 @@ def register_view(request):
 	username = request.data.get('username')
 	email = request.data.get('email')
 	password = request.data.get('password')
-	# profile_picture = request.data.get('profile_picture')
+	profile_picture = request.data.get('profile_picture')
+	
 	try:
 		if User.objects.filter(username=username).exists():
-			return Response('Username already exists.')
+			return Response([False, 'Username already exists.'])
 		if User.objects.filter(email=email).exists():
-			return Response('Email already exists.')
+			return Response([False, 'Email already exists.'])
 		user = User.objects.create_user(username=username, email=email, password=password)
-		user_profile = UserProfile(user=user)
-		user_profile.save()
+		if profile_picture:
+			user_profile = UserProfile(user=user, profile_picture=profile_picture)
+			user_profile.save()
+		else:
+			user_profile = UserProfile(user=user)
+			user_profile.save()
 		user_token = Token(user=user)
 		user_token.save()
 		verification_token = signing.dumps({ 'id': user.id })
 		user_verification_letters = verification_token[19:25]
+		token = user_token.key
+		encrypted_token = signing.dumps({ 'token': token })
 		send_mail(
 			'Your Verification Token',
 			f'{user_verification_letters}',
 			'Dyno Platform',
 			[user.email],
 		)
-		return Response(True)
+		return Response([True, encrypted_token])
 	except:
-		return Response('An error occured, please try again later.')
+		return Response([False, 'An error occured, please try again later.'])
 
 
 @api_view(['GET', 'POST'])
@@ -55,10 +62,10 @@ def login_view(request):
 			if user_token:
 				token = user_token.key
 				encrypted_token = signing.dumps({ 'token': token })
-				return Response(encrypted_token)
+				return Response([True, encrypted_token])
 			else:
-				return Response('User\'s token doesn\'t. exist.')
+				return Response([False, 'User\'s token doesn\'t. exist.'])
 		else:
-			return Response('Invalid Credentials.')
+			return Response([False, 'Invalid Credentials.'])
 	except:
-		return Response('An error occured, please try again later.')
+		return Response([False, 'An error occured, please try again later.'])
