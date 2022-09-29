@@ -4,6 +4,7 @@ import './styles/index.css';
 
 import Login from './components/Login.js';
 import Register from './components/Register.js';
+import Profile from './components/Profile.js';
 
 // React Components
 class App extends React.Component {
@@ -20,6 +21,8 @@ class App extends React.Component {
 		this.goToRegisterPage = this.goToRegisterPage.bind(this)
 		this.turnToDarkMode = this.turnToDarkMode.bind(this)
 		this.turnToLightMode = this.turnToLightMode.bind(this)
+		this.loginUser = this.loginUser.bind(this)
+		this.logoutUser = this.logoutUser.bind(this)
 	}
 	goToLoginPage() {
 		this.setState({ auth_page: true })
@@ -50,6 +53,14 @@ class App extends React.Component {
 			this.setState({ loading_register_page: false })
 		}, 1000)
 	}
+	loginUser(token) {
+		localStorage.setItem('token', token)
+		this.setState({ token: localStorage.getItem('token') })
+	}
+	logoutUser() {
+		localStorage.removeItem('token')
+		this.setState({ token: localStorage.getItem('token') })
+	}
 	render() {
 		return (
 			<main style={{ backgroundColor: this.state.color_mode === 'light' ? '' : '#17252A' }}>
@@ -57,15 +68,15 @@ class App extends React.Component {
 					<span onClick={
 							localStorage.getItem('color_mode') === 'light' ? this.turnToDarkMode : this.turnToLightMode
 						}>
-						<span className={
-							localStorage.getItem('color_mode') === 'light' ? 'fa-regular fa-moon' : 'fa-solid fa-moon'
-							} style={{
+						<span className="fa-regular fa-moon" style={{
 							fontSize: '30px',
 							color: '#3AAFA9',
 						}}></span>
 					</span>
 				</header>
 				{
+					this.state.token ?
+					<Profile /> :
 					this.state.auth_page ?
 					<div>
 						{
@@ -85,7 +96,7 @@ class App extends React.Component {
 									width: '100%',
 								}}></i>
 							</div> :
-							<Login goToRegisterPage={this.goToRegisterPage} />
+							<Login goToRegisterPage={this.goToRegisterPage} loginUser={t => {this.loginUser(t)}} />
 						}
 					</div> :
 					<div>
@@ -106,7 +117,7 @@ class App extends React.Component {
 									width: '100%',
 								}}></i>
 							</div> :
-							<Register goToLoginPage={this.goToLoginPage} />
+							<Register goToLoginPage={this.goToLoginPage} loginUser={t => {this.loginUser(t)}} />
 						}
 					</div>
 				}

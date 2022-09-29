@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import '../styles/login.css';
 
@@ -15,6 +16,7 @@ class Login extends React.Component {
 			password: '',
 		}
 		this.changeInput = this.changeInput.bind(this)
+		this.submitLoginForm = this.submitLoginForm.bind(this)
 	}
 	changeInput(element) {
 		if (element.target.name === 'username') {
@@ -23,9 +25,24 @@ class Login extends React.Component {
 			this.setState({ password: element.target.value })
 		}
 	}
+	submitLoginForm(form) {
+		form.preventDefault()
+		const FormData = require('form-data')
+		const form_data = new FormData()
+		form_data.append('username', this.state.username)
+		form_data.append('password', this.state.password)
+		axios.post('http://localhost:8000/auth/login/', form_data).then(res => {
+			if (res.data === 'Invalid Credentials.') {
+				this.setState({ error: res.data })
+			} else {
+				this.setState({ error: '', username: '', password: '' })
+				this.props.loginUser(res.data)
+			}
+		})
+	}
 	render() {
 		return (
-			<form className={ localStorage.getItem('color_mode') === 'light' ? 'light-login-form' : 'dark-login-form'} action="POST">
+			<form onSubmit={this.submitLoginForm} className={ localStorage.getItem('color_mode') === 'light' ? 'light-login-form' : 'dark-login-form'} action="POST">
 				{
 					localStorage.getItem('color_mode') === 'light' ?
 					<img src={default_light} alt="Dyno Platform Default User - Light Mode" /> :
@@ -33,6 +50,11 @@ class Login extends React.Component {
 						border: '2px solid #2B7A78',
 						borderRadius: '100%',
 					}} alt="Dyno Platform Default User - Dark Mode" />
+				}
+				{
+					this.state.error ?
+					<p className="error">{this.state.error}</p> :
+					null
 				}
 				<h1>Login Account</h1>
 				<div>

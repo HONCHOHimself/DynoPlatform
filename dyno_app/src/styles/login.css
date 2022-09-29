@@ -1,4 +1,14 @@
 
+/*
+	Colors:
+		#17252A
+		#2B7A78
+		#3AAFA9
+		#DEF2F1
+		#FEFFFF
+		#DC3545
+*/
+
 @media only screen and (min-height: 300px) and (max-height: 700px) {
 	main form.light-login-form {
 		margin: 0px 20px;
@@ -46,6 +56,13 @@ main form.light-login-form img {
 	width: 100px;
 	margin-top: 0;
 	margin-bottom: 20px;
+}
+
+main form.light-login-form .error {
+	color: #DC3545;
+	padding-bottom: 5px;
+	text-decoration: underline;
+	font-size: 0.9em;
 }
 
 main form.light-login-form h1 {
@@ -145,6 +162,13 @@ main form.dark-login-form img {
 	margin-bottom: 20px;
 }
 
+main form.dark-login-form .error {
+	color: #DC3545;
+	padding-bottom: 5px;
+	text-decoration: underline;
+	font-size: 0.9em;
+}
+
 main form.dark-login-form h1 {
 	color: #FEFFFF;
 	font-size: 2em;
@@ -191,4 +215,3 @@ main form.dark-login-form p .register-button {
 	color: #DEF2F1;
 	text-decoration: underline;
 }
-
