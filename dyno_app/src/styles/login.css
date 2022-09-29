@@ -215,3 +215,39 @@ main form.dark-login-form p .register-button {
 	color: #DEF2F1;
 	text-decoration: underline;
 }
+
+@media only screen and (min-width: 530px) {
+	main form.dark-login-form input,
+	main form.light-login-form input,
+	main form.dark-login-form input[type="submit"],
+	main form.light-login-form input[type="submit"] {
+		width: 70%;
+	}
+}
+
+@media only screen and (min-width: 700px) {
+	main form.dark-login-form input,
+	main form.light-login-form input,
+	main form.dark-login-form input[type="submit"],
+	main form.light-login-form input[type="submit"] {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 850px) {
+	main form.dark-login-form input,
+	main form.light-login-form input,
+	main form.dark-login-form input[type="submit"],
+	main form.light-login-form input[type="submit"] {
+		width: 40%;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	main form.dark-login-form input,
+	main form.light-login-form input,
+	main form.dark-login-form input[type="submit"],
+	main form.light-login-form input[type="submit"] {
+		width: 30%;
+	}
+}

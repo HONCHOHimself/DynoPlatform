@@ -229,3 +229,59 @@ main form.dark-register-form .input-error {
 	justify-content: flex-end;
 	padding: 2px 10px 0px 5px;
 }
+
+@media only screen and (min-width: 530px) {
+	main form.dark-register-form input,
+	main form.light-register-form input,
+	main form.dark-register-form input[type="submit"],
+	main form.light-register-form input[type="submit"] {
+		width: 70%;
+	}
+
+	main form.dark-register-form .input-error,
+	main form.light-register-form .input-error {
+		width: 85%;
+	}
+}
+
+@media only screen and (min-width: 700px) {
+	main form.dark-register-form input,
+	main form.light-register-form input,
+	main form.dark-register-form input[type="submit"],
+	main form.light-register-form input[type="submit"] {
+		width: 50%;
+	}
+
+	main form.dark-register-form .input-error,
+	main form.light-register-form .input-error {
+		width: 75%;
+	}
+}
+
+@media only screen and (min-width: 850px) {
+	main form.dark-register-form input,
+	main form.light-register-form input,
+	main form.dark-register-form input[type="submit"],
+	main form.light-register-form input[type="submit"] {
+		width: 40%;
+	}
+
+	main form.dark-register-form .input-error,
+	main form.light-register-form .input-error {
+		width: 70%;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	main form.dark-register-form input,
+	main form.light-register-form input,
+	main form.dark-register-form input[type="submit"],
+	main form.light-register-form input[type="submit"] {
+		width: 30%;
+	}
+
+	main form.dark-register-form .input-error,
+	main form.light-register-form .input-error {
+		width: 65%;
+	}
+}

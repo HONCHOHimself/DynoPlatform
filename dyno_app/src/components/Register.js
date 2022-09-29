@@ -68,11 +68,6 @@ class Register extends React.Component {
 			}
 		})
 	}
-	componentDidMount() {
-		setInterval(() => {
-			this.setState({ error: '' })
-		}, 5000)
-	}
 	render() {
 		return (
 			<form onSubmit={this.submitRegisterForm} className={ localStorage.getItem('color_mode') === 'light' ? 'light-register-form' : 'dark-register-form'} action="POST">

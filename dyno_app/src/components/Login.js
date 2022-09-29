@@ -40,11 +40,6 @@ class Login extends React.Component {
 			}
 		})
 	}
-	componentDidMount() {
-		setInterval(() => {
-			this.setState({ error: '' })
-		}, 5000)
-	}
 	render() {
 		return (
 			<form onSubmit={this.submitLoginForm} className={ localStorage.getItem('color_mode') === 'light' ? 'light-login-form' : 'dark-login-form'} action="POST">
