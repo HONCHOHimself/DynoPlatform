@@ -1,4 +1,24 @@
 
-div {
-	color: white;
+/*
+	Colors:
+		#17252A
+		#2B7A78
+		#3AAFA9
+		#DEF2F1
+		#FEFFFF
+		#DC3545
+*/
+
+main .profile {
+	padding: 30px;
+	padding-top: 80px;
+}
+
+main .profile img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+	margin-top: 0;
+	margin-bottom: 20px;
 }

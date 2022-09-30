@@ -1,0 +1,36 @@
+
+# auth_app
+
+	1. http://localhost:8000/auth/register/
+		inputs: username, email, password, profile_picture
+
+	2. http://localhost:8000/auth/login/
+		inputs: username, password
+
+# form_validation_app
+	
+	1. http://localhost:8000/form-validation/check-username/
+		inputs: username
+
+	2. http://localhost:8000/form-validation/check-email/
+		inputs: email
+
+# user_app
+
+	1. http://localhost:8000/client/current-user/<user_token>/
+
+	2. http://localhost:8000/client/current-user/profile/<user_token>/
+
+	3. http://localhost:8000/client/input-results/
+		inputs: letter
+
+	4. http://localhost:8000/client/user-result/<user_id>/
+
+	5. http://localhost:8000/client/user-result/profile/<user_id>/
+
+# user_verification_app
+
+	1. http://localhost:8000/account-verification/send-verification-email/<user_token>/
+
+	2. http://localhost:8000/account-verification/user-verification/<user_token>/
+		inputs: verification_code

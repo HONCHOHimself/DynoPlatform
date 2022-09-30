@@ -24,15 +24,3 @@ main {
 	bottom: 0;
 	height: 100%;
 }
-
-main header {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	margin: 20px 20px 0px 20px;
-	border: 0;
-}
-
-main header img {
-	width: 40px;
-}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import './styles/index.css';
 
+import Header from './components/Header.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Profile from './components/Profile.js';
@@ -54,16 +55,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<main style={{ backgroundColor: this.state.color_mode === 'light' ? '' : '#17252A' }}>
-				<header>
-					<span onClick={
-							localStorage.getItem('color_mode') === 'light' ? this.turnToDarkMode : this.turnToLightMode
-						}>
-						<span className="fa-regular fa-moon" style={{
-							fontSize: '30px',
-							color: '#3AAFA9',
-						}}></span>
-					</span>
-				</header>
+				<Header turnToDarkMode={this.turnToDarkMode} turnToLightMode={this.turnToLightMode} logoutUser={this.logoutUser} />
 				{
 					this.state.token ?
 					<Profile /> :

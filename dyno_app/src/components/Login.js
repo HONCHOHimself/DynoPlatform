@@ -6,6 +6,9 @@ import '../styles/login.css';
 import default_light from '../images/default-light.png';
 import default_dark from '../images/default-dark.png';
 
+import user_icon from '../icons/user-solid.svg';
+import password_icon from '../icons/lock-solid.svg';
+
 // React Components
 class Login extends React.Component {
 	constructor(props) {
@@ -58,8 +61,7 @@ class Login extends React.Component {
 				}
 				<h1>Login Account</h1>
 				<div>
-					<i className="fa-solid fa-user" style={{
-						fontSize: '1em',
+					<img src={user_icon} alt="Dyno - Username Icon" style={{
 						position: 'absolute',
 						top: '',
 						botton: '',
@@ -68,12 +70,12 @@ class Login extends React.Component {
 						marginTop: '24px',
 						marginLeft: '18px',
 						color: '#3AAFA9',
-					}}></i>
+						width: '14px'
+					}} />
 					<input type="text" name="username" value={this.state.username} onChange={this.changeInput} placeholder="Username" minLength="4" maxLength="18" required />
 				</div>
 				<div>
-					<i className="fa-solid fa-lock" style={{
-						fontSize: '1em',
+					<img src={password_icon} alt="Dyno - Password Icon" style={{
 						position: 'absolute',
 						top: '',
 						botton: '',
@@ -82,7 +84,8 @@ class Login extends React.Component {
 						marginTop: '24px',
 						marginLeft: '18px',
 						color: '#3AAFA9',
-					}}></i>
+						width: '14px'
+					}} />
 					<input type="password" name="password" value={this.state.password} onChange={this.changeInput} placeholder="Password" minLength="8" maxLength="24" required />
 				</div>
 				<div>

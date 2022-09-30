@@ -1,0 +1,17 @@
+
+/*
+	Colors:
+		#17252A
+		#2B7A78
+		#3AAFA9
+		#DEF2F1
+		#FEFFFF
+		#DC3545
+*/
+
+main header {
+	display: flex;
+	align-items: center;
+	margin: 20px 20px 0px 20px;
+	border: 0;
+}

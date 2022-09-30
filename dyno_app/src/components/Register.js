@@ -6,6 +6,10 @@ import '../styles/register.css';
 import default_light from '../images/default-light.png';
 import default_dark from '../images/default-dark.png';
 
+import user_icon from '../icons/user-solid.svg';
+import email_icon from '../icons/at-solid.svg';
+import password_icon from '../icons/lock-solid.svg';
+
 // React Components
 class Register extends React.Component {
 	constructor(props) {
@@ -86,17 +90,17 @@ class Register extends React.Component {
 				}
 				<h1>Create Account</h1>
 				<div>
-					<i className="fa-solid fa-user" style={{
-						fontSize: '1em',
+					<img src={user_icon} alt="Dyno - Username Icon" style={{
 						position: 'absolute',
 						top: '',
 						botton: '',
 						right: '',
 						left: '',
-						marginTop: '24px',
+						marginTop: '25px',
 						marginLeft: '18px',
 						color: '#3AAFA9',
-					}}></i>
+						width: '14px'
+					}} />
 					{
 						this.state.username_invalid[0] ?
 						<input style={{ border: '1px solid #DC3545', }} type="text" name="username" onChange={e => {this.changeInput(e)}} placeholder="Username" minLength="4" maxLength="18" required /> :
@@ -109,17 +113,17 @@ class Register extends React.Component {
 					}
 				</div>
 				<div>
-					<i className="fa-solid fa-at" style={{
-						fontSize: '1em',
+					<img src={email_icon} alt="Dyno - Email Icon" style={{
 						position: 'absolute',
 						top: '',
 						botton: '',
 						right: '',
 						left: '',
-						marginTop: '24px',
+						marginTop: '25px',
 						marginLeft: '18px',
 						color: '#3AAFA9',
-					}}></i>
+						width: '16px'
+					}} />
 					{
 						this.state.email_invalid[0] ?
 						<input style={{ border: '1px solid #DC3545', }} type="email" name="email" onChange={e => {this.changeInput(e)}} placeholder="Email address" minLength="4" maxLength="36" required /> :
@@ -132,17 +136,17 @@ class Register extends React.Component {
 					}
 				</div>
 				<div>
-					<i className="fa-solid fa-lock" style={{
-						fontSize: '1em',
+					<img src={password_icon} alt="Dyno - Password Icon" style={{
 						position: 'absolute',
 						top: '',
 						botton: '',
 						right: '',
 						left: '',
-						marginTop: '24px',
+						marginTop: '25px',
 						marginLeft: '18px',
 						color: '#3AAFA9',
-					}}></i>
+						width: '14px'
+					}} />
 					<input type="password" name="password" onChange={e => {this.changeInput(e)}} placeholder="Password" minLength="8" maxLength="24" required />
 				</div>
 				<div>
