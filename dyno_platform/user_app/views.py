@@ -14,33 +14,51 @@ from .serializers import UserSerializer, UserProfileSerializer
 # Create your views here.
 @api_view(['GET'])
 def current_user(request, user_token):
-	try:
-		decrypted_token = signing.loads(user_token)['token']
-		token = Token.objects.filter(key=decrypted_token).first()
-		if token:
-			user = token.user
-			user_serializer = UserSerializer(user)
-			return Response(user_serializer.data)
-		else:
-			return Response('User Doesn\'t exist.')
-	except:
-		return Response('An error occured, please try again later.')
+	decrypted_token = signing.loads(user_token)['token']
+	token = Token.objects.filter(key=decrypted_token).first()
+	if token:
+		user = token.user
+		user_serializer = UserSerializer(user)
+		return Response(user_serializer.data)
+	else:
+		# User doesn't exists.
+		return Response(False)
 
 
 @api_view(['GET'])
 def current_user_profile(request, user_token):
-	try:
-		decrypted_token = signing.loads(user_token)['token']
-		token = Token.objects.filter(key=decrypted_token).first()
-		if token:
-			user = token.user
-			profile = UserProfile.objects.filter(user=user).first()
-			profile_serializer = UserProfileSerializer(profile)
-			return Response(profile_serializer.data)
+	decrypted_token = signing.loads(user_token)['token']
+	token = Token.objects.filter(key=decrypted_token).first()
+	if token:
+		user = token.user
+		profile = UserProfile.objects.filter(user=user).first()
+		profile_serializer = UserProfileSerializer(profile)
+		return Response(profile_serializer.data)
+	else:
+		# User doesn't exists.
+		return Response(False)
+
+
+@api_view(['POST', 'GET'])
+def change_color_mode(request, user_token):
+	decrypted_token = signing.loads(user_token)['token']
+	token = Token.objects.filter(key=decrypted_token).first()
+	if token:
+		user = token.user
+		profile = UserProfile.objects.filter(user=user).first()
+		if profile.color_mode == True:
+			profile.color_mode = False
+			profile.save()
+			# Changed color mode to dark.
+			return Response(True)
 		else:
-			return Response('User Doesn\'t exist.')
-	except:
-		return Response('An error occured, please try again later.')
+			profile.color_mode = True
+			profile.save()
+			# Changed color mode to light.
+			return Response(True)
+	else:
+		# User doesn't exists.
+		return Response(False)
 
 
 @api_view(['GET', 'POST'])
@@ -48,39 +66,28 @@ def input_results(request):
 	
 	letter = request.data.get('letter')
 
-	try:
-		users = []
-		if User.objects.filter(username__contains=letter).exists():
-			match_users = User.objects.filter(username__contains=letter).all()
-			for match_user in match_users:
-				user = UserProfile.objects.filter(user=match_user).first()
-				users.append(user)
-			serializer = UserSerializer(users, many=True)
-			return Response([True, serializer.data])
-		else:
-			return Response([False, 'No Result.'])
-	except:
-		return Response([False, 'An error occured, please try again later.'])
+	if User.objects.filter(username__icontains=letter).exists():
+		users = User.objects.filter(username__icontains=letter).all()
+		serializer = UserSerializer(users, many=True)
+		return Response(serializer.data)
+	else:
+		# No results.
+		return Response(False)
 
 
 @api_view(['GET', 'POST'])
 def search_result_user(request, user_id):
-	try:
-		if User.objects.filter(id=user_id).exists():
-			user = User.objects.filter(id=user_id).first()
-			serializer = UserSerializer(user)
-			return Response([True, serializer.data])
-		else:
-			return Response([False, 'No Result.'])
-	except:
-		return Response([False, 'An error occured, please try again later.'])
+	if User.objects.filter(id=user_id).exists():
+		user = User.objects.filter(id=user_id).first()
+		serializer = UserSerializer(user)
+		return Response(serializer.data)
+	else:
+		# No results.
+		return Response(False)
 
 
 @api_view(['GET', 'POST'])
 def user_profile(request, user_id):
-	try:
-		user_profile = UserProfile.objects.filter(user=user_id).first()
-		serializer = UserProfileSerializer(profile)
-		return Response([True, serializer.data])
-	except:
-		return Response([False, 'An error occured, please try again later.'])
+	user_profile = UserProfile.objects.filter(user=user_id).first()
+	serializer = UserProfileSerializer(user_profile)
+	return Response(serializer.data)

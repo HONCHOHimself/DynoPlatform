@@ -6,6 +6,7 @@ import Header from './components/Header.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Profile from './components/Profile.js';
+import SearchBar from './components/SearchBar.js';
 
 // React Components
 class App extends React.Component {
@@ -54,14 +55,21 @@ class App extends React.Component {
 	}
 	render() {
 		return (
-			<main style={{ backgroundColor: this.state.color_mode === 'light' ? '' : '#17252A' }}>
+			<main style={{
+				backgroundColor: this.state.color_mode === 'light' ? '' : '#17252A',
+			}}>
 				<Header turnToDarkMode={this.turnToDarkMode} turnToLightMode={this.turnToLightMode} logoutUser={this.logoutUser} />
 				{
 					this.state.token ?
-					<Profile /> :
+					<Profile turnToDarkMode={this.turnToDarkMode} turnToLightMode={this.turnToLightMode} /> :
 					this.state.auth_page ?
 					<Login goToRegisterPage={this.goToRegisterPage} loginUser={t => {this.loginUser(t)}} /> :
 					<Register goToLoginPage={this.goToLoginPage} loginUser={t => {this.loginUser(t)}} />
+				}
+				{
+					this.state.token ?
+					<SearchBar /> :
+					null
 				}
 			</main>
 		)

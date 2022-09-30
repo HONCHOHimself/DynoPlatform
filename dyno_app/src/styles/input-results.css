@@ -1,0 +1,53 @@
+
+/*
+	Colors:
+		#17252A
+		#2B7A78
+		#3AAFA9
+		#DEF2F1
+		#FEFFFF
+		#DC3545
+*/
+
+main form.search-bar .light_mode_result {
+	width: 100%;
+	background-color: #DEF2F1;
+	border-radius: 15px;
+	padding: 15px 12px;
+	color: #17252A;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+main form.search-bar .light_mode_result img {
+	width: 80px;
+}
+
+main form.search-bar .light_mode_result h1 {
+	font-size: 1.5em;
+	margin-left: 15px;
+}
+
+main form.search-bar .dark_mode_result {
+	width: 100%;
+	background-color: #17252A;
+	border-radius: 15px;
+	padding: 15px 12px;
+	color: #3AAFA9;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	border: 1px solid #3AAFA9;
+	margin-bottom: 20px;
+}
+
+main form.search-bar .dark_mode_result img {
+	width: 80px;
+}
+
+main form.search-bar .dark_mode_result h1 {
+	font-size: 1.5em;
+	margin-left: 15px;
+}

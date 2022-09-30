@@ -15,6 +15,7 @@ def username_validation(request):
 		if User.objects.filter(username=username).exists():
 			return Response('Username already exists.')
 		else:
+			# Usernam is valid.
 			return Response(True)
 	except:
 		return Response('An error occured, please try again later.')
@@ -29,6 +30,7 @@ def email_validation(request):
 		if User.objects.filter(email=email).exists():
 			return Response('Email already exists.')
 		else:
+			# Email is valid.
 			return Response(True)
 	except:
 		return Response('An error occured, please try again later.')

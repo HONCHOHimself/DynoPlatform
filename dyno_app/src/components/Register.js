@@ -63,12 +63,15 @@ class Register extends React.Component {
 		form_data.append('username', this.state.username)
 		form_data.append('email', this.state.email)
 		form_data.append('password', this.state.password)
+		localStorage.getItem('color_mode') === 'light' ?
+		form_data.append('color_mode', 'light') :
+		form_data.append('color_mode', 'dark')
 		axios.post('http://localhost:8000/auth/register/', form_data).then(res => {
-			if (res.data[0] !== true) {
-				this.setState({ error: res.data[1] })
+			if (res.data === false) {
+				this.setState({ error: 'User already exists.' })
 			} else {
 				this.setState({ error: '', username: '', email: '', password: '' })
-				this.props.loginUser(res.data[1])
+				this.props.loginUser(res.data)
 			}
 		})
 	}

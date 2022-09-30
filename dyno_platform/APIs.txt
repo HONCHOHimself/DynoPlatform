@@ -21,6 +21,8 @@
 
 	2. http://localhost:8000/client/current-user/profile/<user_token>/
 
+	2.5. http://localhost:8000/client/current-user/<user_token>/change-color-mode/
+
 	3. http://localhost:8000/client/input-results/
 		inputs: letter
 

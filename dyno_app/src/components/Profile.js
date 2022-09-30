@@ -21,6 +21,11 @@ class Profile extends React.Component {
 		})
 		axios.get('http://localhost:8000/client/current-user/profile/' + localStorage.getItem('token') + '/').then(res => {
 			this.setState({ profile: res.data })
+			if (this.state.profile.color_mode === true) {
+				this.props.turnToLightMode()
+			} else if (this.state.profile.color_mode === false) {
+				this.props.turnToDarkMode()
+			}
 		})
 	}
 	render() {

@@ -35,11 +35,11 @@ class Login extends React.Component {
 		form_data.append('username', this.state.username)
 		form_data.append('password', this.state.password)
 		axios.post('http://localhost:8000/auth/login/', form_data).then(res => {
-			if (res.data[0] !== true) {
-				this.setState({ error: res.data[1] })
+			if (res.data === false) {
+				this.setState({ error: 'Invalid Credential.' })
 			} else {
 				this.setState({ error: '', username: '', password: '' })
-				this.props.loginUser(res.data[1])
+				this.props.loginUser(res.data)
 			}
 		})
 	}
@@ -60,7 +60,7 @@ class Login extends React.Component {
 					null
 				}
 				<h1>Login Account</h1>
-				<div>
+				<div className="input">
 					<img src={user_icon} alt="Dyno - Username Icon" style={{
 						position: 'absolute',
 						top: '',
@@ -74,7 +74,7 @@ class Login extends React.Component {
 					}} />
 					<input type="text" name="username" value={this.state.username} onChange={this.changeInput} placeholder="Username" minLength="4" maxLength="18" required />
 				</div>
-				<div>
+				<div className="input">
 					<img src={password_icon} alt="Dyno - Password Icon" style={{
 						position: 'absolute',
 						top: '',

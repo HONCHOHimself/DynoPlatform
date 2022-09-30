@@ -1,0 +1,45 @@
+
+/*
+	Colors:
+		#17252A
+		#2B7A78
+		#3AAFA9
+		#DEF2F1
+		#FEFFFF
+		#DC3545
+*/
+
+main form.search-bar {
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+main form.search-bar .input {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 10px;
+}
+
+main form.search-bar input {
+	text-align: center;
+	width: 100%;
+	font-size: 1em;
+	font-weight: 600;
+	padding: 12px 12px 12px 12px;
+}
+
+main form.search-bar input:focus {
+	outline: none;
+}
+
+main form.search-bar .results {
+	height: 400px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 10px;
+	overflow: scroll;
+}

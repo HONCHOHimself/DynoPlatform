@@ -19,34 +19,43 @@ def register_view(request):
 	email = request.data.get('email')
 	password = request.data.get('password')
 	profile_picture = request.data.get('profile_picture')
+	color_mode = request.data.get('color_mode')
 	
-	try:
-		if User.objects.filter(username=username).exists():
-			return Response([False, 'Username already exists.'])
+	user = authenticate(request, username=username, password=password)
+	if user:
+		# User already exists.
+		return Response(False)
+	else:
 		if User.objects.filter(email=email).exists():
-			return Response([False, 'Email already exists.'])
-		user = User.objects.create_user(username=username, email=email, password=password)
-		if profile_picture:
-			user_profile = UserProfile(user=user, profile_picture=profile_picture)
-			user_profile.save()
+			# Email already exists.
+			return Response(False)
 		else:
+			user = User.objects.create_user(username=username, email=email, password=password)
 			user_profile = UserProfile(user=user)
 			user_profile.save()
-		user_token = Token(user=user)
-		user_token.save()
-		verification_token = signing.dumps({ 'id': user.id })
-		user_verification_letters = verification_token[19:25]
-		token = user_token.key
-		encrypted_token = signing.dumps({ 'token': token })
-		send_mail(
-			'Your Verification Token',
-			f'{user_verification_letters}',
-			'Dyno Platform',
-			[user.email],
-		)
-		return Response([True, encrypted_token])
-	except:
-		return Response([False, 'An error occured, please try again later.'])
+			if profile_picture:
+				user_profile.profile_picture = profile_picture
+				user_profile.save()
+			if color_mode:
+				if color_mode == 'light':
+					user_profile.color_mode = True
+					user_profile.save()
+				elif color_mode == 'dark':
+					user_profile.color_mode = False
+					user_profile.save()
+			user_token = Token(user=user)
+			user_token.save()
+			verification_token = signing.dumps({ 'id': user.id })
+			user_verification_letters = verification_token[19:25]
+			token = user_token.key
+			encrypted_token = signing.dumps({ 'token': token })
+			send_mail(
+				'Your Verification Token',
+				f'{user_verification_letters}',
+				'Dyno Platform',
+				[user.email],
+			)
+			return Response(encrypted_token)
 
 
 @api_view(['GET', 'POST'])
@@ -55,17 +64,12 @@ def login_view(request):
 	username = request.data.get('username')
 	password = request.data.get('password')
 
-	try:
-		user = authenticate(request, username=username, password=password)
-		if user:
-			user_token = Token.objects.filter(user=user).first()
-			if user_token:
-				token = user_token.key
-				encrypted_token = signing.dumps({ 'token': token })
-				return Response([True, encrypted_token])
-			else:
-				return Response([False, 'User\'s token doesn\'t. exist.'])
-		else:
-			return Response([False, 'Invalid Credentials.'])
-	except:
-		return Response([False, 'An error occured, please try again later.'])
+	user = authenticate(request, username=username, password=password)
+	if user:
+		user_token = Token.objects.filter(user=user).first()
+		token = user_token.key
+		encrypted_token = signing.dumps({ 'token': token })
+		return Response(encrypted_token)
+	else:
+		# User doesn't exists.
+		return Response(False)
