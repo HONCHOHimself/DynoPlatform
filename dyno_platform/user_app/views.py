@@ -7,9 +7,9 @@ from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.models import User
 
-from user_app.models import UserProfile
+from .models import UserProfile
 
-from .serializers import UserProfileSerializer
+from .serializers import UserSerializer, UserProfileSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -19,9 +19,24 @@ def current_user(request, user_token):
 		token = Token.objects.filter(key=decrypted_token).first()
 		if token:
 			user = token.user
-			user_profile = UserProfile.objects.filter(user=user).first()
-			serializer = UserProfileSerializer(user_profile)
-			return Response(serializer.data)
+			user_serializer = UserSerializer(user)
+			return Response(user_serializer.data)
+		else:
+			return Response('User Doesn\'t exist.')
+	except:
+		return Response('An error occured, please try again later.')
+
+
+@api_view(['GET'])
+def current_user_profile(request, user_token):
+	try:
+		decrypted_token = signing.loads(user_token)['token']
+		token = Token.objects.filter(key=decrypted_token).first()
+		if token:
+			user = token.user
+			profile = UserProfile.objects.filter(user=user).first()
+			profile_serializer = UserProfileSerializer(profile)
+			return Response(profile_serializer.data)
 		else:
 			return Response('User Doesn\'t exist.')
 	except:
@@ -29,37 +44,43 @@ def current_user(request, user_token):
 
 
 @api_view(['GET', 'POST'])
-def search_list(request):
+def input_results(request):
 	
 	letter = request.data.get('letter')
 
 	try:
-		profiles = []
+		users = []
 		if User.objects.filter(username__contains=letter).exists():
-			users = User.objects.filter(username__contains=letter).all()
-			for user in users:
-				user_profile = UserProfile.objects.filter(user=user).first()
-				profiles.append(user_profile)
-			serializer = UserProfileSerializer(profiles, many=True)
-			return Response(serializer.data)
+			match_users = User.objects.filter(username__contains=letter).all()
+			for match_user in match_users:
+				user = UserProfile.objects.filter(user=match_user).first()
+				users.append(user)
+			serializer = UserSerializer(users, many=True)
+			return Response([True, serializer.data])
 		else:
-			return Response('No Result.')
+			return Response([False, 'No Result.'])
 	except:
-		return Response('An error occured, please try again later.')
+		return Response([False, 'An error occured, please try again later.'])
 
 
 @api_view(['GET', 'POST'])
-def search_user(request):
-	
-	username = request.data.get('username')
-
+def search_result_user(request, user_id):
 	try:
-		if User.objects.filter(username=username).exists():
-			user = User.objects.filter(username=username).first()
-			user_profile = UserProfile.objects.filter(user=user).first()
-			serializer = UserProfileSerializer(user_profile)
-			return Response(serializer.data)
+		if User.objects.filter(id=user_id).exists():
+			user = User.objects.filter(id=user_id).first()
+			serializer = UserSerializer(user)
+			return Response([True, serializer.data])
 		else:
-			return Response('No Result.')
+			return Response([False, 'No Result.'])
 	except:
-		return Response('An error occured, please try again later.')
+		return Response([False, 'An error occured, please try again later.'])
+
+
+@api_view(['GET', 'POST'])
+def user_profile(request, user_id):
+	try:
+		user_profile = UserProfile.objects.filter(user=user_id).first()
+		serializer = UserProfileSerializer(profile)
+		return Response([True, serializer.data])
+	except:
+		return Response([False, 'An error occured, please try again later.'])

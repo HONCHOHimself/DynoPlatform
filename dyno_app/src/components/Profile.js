@@ -11,22 +11,19 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			current_user: {}
+			user: {},
+			profile: {}
 		}
 	}
 	componentDidMount() {
 		axios.get('http://localhost:8000/client/current-user/' + localStorage.getItem('token') + '/').then(res => {
-			this.setState({ current_user: res.data })
+			this.setState({ user: res.data })
 		})
 	}
 	render() {
 		return (
 			<div>
-				{this.state.current_user.id}
-				{this.state.current_user.profile_picture ? <img src="" /> : <p>No pic</p>}
-				{this.state.current_user.color_mode ? <p>yes</p> : <p>no</p>}
-				{this.state.current_user.verified_user ? <p>yes</p> : <p>no</p>}
-				{this.state.current_user.user}
+				{this.state.user.username}
 			</div>
 		)
 	}
